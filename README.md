@@ -4,9 +4,9 @@ cat <<EOT > README.md
 Questo repository raccoglie materiali di esercitazione e progetti pratici di studio per il programma AWS re/Start 2025/26 organizzato da Edgemony in collaborazione con AWS.
 
 ## 📂 Struttura della Repository
-- **Cartelle per data/**: Esercitazioni pratiche svolte in classe e a casa indicate con la data del giorno.
-- **note teoriche/**: Appunti personali sulle lezioni teoriche.
-- **progetti/**: Assignment e project work di fine modulo.
+- **Cartelle per data**: Esercitazioni pratiche svolte in classe e a casa indicate con la data del giorno.
+- **note teoriche**: Appunti personali sulle lezioni teoriche.
+- **progetti**: Assignment e project work di fine modulo.
 
 ## 🛠 Tecnologie Utilizzate
 - **Linguaggi & Frameworks**: Python, Bash Shell, Django
