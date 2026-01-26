@@ -1,0 +1,16 @@
+cat <<EOT > .gitignore
+# Python
+__pycache__/
+*.py[cod]
+*venv/
+.env
+
+# AWS & Secrets
+.aws/
+credentials.csv
+secrets.json
+
+# VS Code & System
+.vscode/
+.DS_Store
+EOT

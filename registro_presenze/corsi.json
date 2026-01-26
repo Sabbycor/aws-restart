@@ -1,0 +1,20 @@
+{
+  "corsi": {
+    "Inlgese c2": {
+      "nome": "Inlgese c2",
+      "ore_totali": 200,
+      "percentuale_minima": 80,
+      "lezioni": []
+    }
+  },
+  "partecipanti": {
+    "MAT1000": {
+      "cognome": "Corrado",
+      "nome": "Sabrina",
+      "data_iscrizione": "2025-01-13",
+      "matricola": "MAT1000",
+      "corsi_iscritti": []
+    }
+  },
+  "ultimo_aggiornamento": "2026-01-13 16:52:38"
+}
