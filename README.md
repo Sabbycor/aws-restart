@@ -1,4 +1,4 @@
-cat <<EOT > README.md
+
 # Corso AWS re/Start 2026 ☁️
 
 Questo repository raccoglie materiali di esercitazione e progetti pratici di studio per il programma AWS re/Start 2025/26 organizzato da Edgemony in collaborazione con AWS.
