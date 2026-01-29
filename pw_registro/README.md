@@ -1,4 +1,4 @@
-# Progect Work
+# Project Work
 Creazione applicazione registro delle presenze/assenze
 
 ## Partecipanti progetto
