@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Variabili d'ambiente e segreti (FONDAMENTALE)
+.env
+.env.local
+
+# Database locale
+db.sqlite3
+db.sqlite3-journal
+
+# Cartella Virtual Environment (adatta il nome se diverso)
+venv/
+env/
+.venv/
+
+# Media statici caricati dagli utenti (non vanno nel codice!)
+media/
+staticfiles/
+
+# Log e Debug
+*.log
+local_settings.py
+
+# IDE e Sistema Operativo
+.vscode/
+.idea/
+.DS_Store
