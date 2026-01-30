@@ -11,11 +11,13 @@ class Partecipante(models.Model):
         on_delete=models.CASCADE,
         related_name="participant_profile"
     )
-
+    matricola = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email_preautorizzata = models.EmailField(unique = True)
     data_iscrizione = models.DateField(null=True, blank= True)
     
     
     
+
     
 class Meta:
     db_table = "partecipanti"

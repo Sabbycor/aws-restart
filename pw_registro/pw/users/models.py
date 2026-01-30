@@ -9,4 +9,7 @@ class User(AbstractUser):
 
     def str(self):
         return self.username
+    
+class Meta:
+    db_table = "users"
 

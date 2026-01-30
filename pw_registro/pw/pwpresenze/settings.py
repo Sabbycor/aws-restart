@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'giorni_presenze',
     'partecipanti',
     'presenze',
-    'users'
+    'users',
+    'rest_framework',
 ]
 
 AUTH_USER_MODEL = 'users.User'
