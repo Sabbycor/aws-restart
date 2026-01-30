@@ -9,15 +9,13 @@ class Partecipante(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="participant_profile"
+        related_name="participant_profile",
+        null=True,  # Permette di creare partecipanti senza utente collegato
+        blank=True
     )
     matricola = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    email_preautorizzata = models.EmailField(unique = True)
-    data_iscrizione = models.DateField(null=True, blank= True)
+    email_preautorizzata = models.EmailField(unique=True)
+    data_iscrizione = models.DateField(null=True, blank=True)
     
-    
-    
-
-    
-class Meta:
-    db_table = "partecipanti"
+    class Meta:
+        db_table = "partecipanti"

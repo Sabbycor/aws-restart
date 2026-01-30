@@ -7,9 +7,9 @@ class User(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_participant = models.BooleanField(default=False)
 
-    def str(self):
+    def __str__(self):
         return self.username
     
-class Meta:
-    db_table = "users"
+    class Meta:
+        db_table = "users"
 
