@@ -12,22 +12,33 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'email', 'password', 'password2']
 
-
     def validate(self, data):
+        # 1. Controllo coincidenza password
         if data['password'] != data['password2']:
             raise serializers.ValidationError({'password': 'Le password non coincidono'})
-        # controllo via di mezzo. L'email deve essere già stata censita dall'admin
-        if not Partecipante.objects.filter(email_pre_autorizzata=data['email']).exists():
+        
+        # 2. Controllo Whitelist (Il database deve avere questa email)
+        # NOTA: Usiamo email_preautorizzata (nome corretto del campo)
+        if not Partecipante.objects.filter(email_preautorizzata=data['email']).exists():
             raise serializers.ValidationError({'email': 'Questa email non risulta tra i partecipanti autorizzati.'})
 
         return data
 
     def create(self, validated_data):
+        # Togliamo password2 prima di salvare nel DB
         validated_data.pop('password2')
-        # Creiamo l'utente. Stiamo collegando l'utente al profilo partecipante esistente
+        
+        # Creiamo l'utente
         user = User.objects.create_user(**validated_data, is_participant=True)
-        partecipante = Partecipante.objects.get(email_pre_autorizzata=user.email)
-        partecipante.user = user
-        partecipante.save()
+        
+        # Colleghiamo l'utente al profilo partecipante esistente
+        try:
+            partecipante = Partecipante.objects.get(email_preautorizzata=user.email)
+            partecipante.user = user
+            partecipante.save()
+        except Partecipante.DoesNotExist:
+            # Protezione nel caso l'email sparisca tra validate e create
+            user.delete()
+            raise serializers.ValidationError({'email': 'Errore durante il collegamento al partecipante.'})
 
         return user

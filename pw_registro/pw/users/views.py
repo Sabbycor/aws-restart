@@ -31,8 +31,8 @@ def register_user(request):
             
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    except OperationalError:
-        return JsonResponse({'error': 'Database non disponibile al momento'}, status=503)
+    except Exception as e:#OperationalError:
+        return Response({'error': str(e)}, status=503)
     except Exception as e:
         return JsonResponse({'error': f'Errore imprevisto: {str(e)}'}, status=500)
 

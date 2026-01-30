@@ -1,36 +1,34 @@
-from django.http import JsonResponse
 from django.db import OperationalError
-from rest_framework.decorators import api_view, permission_classes, authentication_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-
+from django.http import JsonResponse
 from .models import Partecipante
-from presenze.models import Presenza 
 from giorni_presenze.models import Giorno
-
-# VISTA DEGLI ADMIN
+from presenze.models import Presenza
+from partecipanti.serializers import ParticipantAdminSerializer # Assicurati di averlo creato!
 
 @api_view(['GET', 'POST'])
 @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 def manage_participants(request):
-    """
-    LOGICA ADMIN:
-    GET -> Vede la lista di tutti i partecipanti con matricola UUID.
-    POST -> Inserisce un nuovo partecipante (email e data) per autorizzarlo.
-    """
     if not request.user.is_admin:
         return JsonResponse({'error': 'Solo l\'admin può gestire i partecipanti'}, status=403)
 
     if request.method == 'GET':
         partecipanti = Partecipante.objects.all()
-        # ... (logica di prima per creare la lista)
-        return JsonResponse(list, safe=False)
+        serializer = ParticipantAdminSerializer(partecipanti, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
     if request.method == 'POST':
-        # ... (logica di prima per creare il partecipante)
-        return JsonResponse({'status': 'creato'}, status=201)
+        serializer = ParticipantAdminSerializer(data=request.data)
+        if serializer.is_valid():
+            # QUESTO SALVA NEL DATABASE (DBeaver vedrà i dati)
+            serializer.save() 
+            return JsonResponse(serializer.data, status=201)
+        
+        return JsonResponse(serializer.errors, status=400)
 
 # VISTA DEI PARTECIPANTI
 
